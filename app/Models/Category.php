@@ -6,15 +6,9 @@ use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Product extends Model
+class Category extends Model
 {
     use HasFactory, HasSlug;
-
-    protected $casts = [
-        'properties' => 'array',
-        'offer_limit' => 'date',
-        'is_visible' => 'boolean',
-    ];
 
     public function getSlugOptions(): SlugOptions
     {
@@ -23,9 +17,9 @@ class Product extends Model
             ->saveSlugsTo('slug');
     }
 
-    public function brand()
+    public function categories()
     {
-        return $this->belongsTo(Brand::class);
+        return $this->hasMany(Category::class);
     }
 
     public function category()
