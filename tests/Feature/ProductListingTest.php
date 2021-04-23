@@ -2,25 +2,16 @@
 
 namespace Tests\Feature;
 
+use Tests\TestCase;
 use App\Models\Product;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
 
 class ProductListingTest extends TestCase
 {
     use RefreshDatabase;
 
     /** @test */
-    public function homepage_can_be_rendered()
-    {
-        $response = $this->get('/');
-
-        $response->assertStatus(200);
-    }
-
-    /** @test */
-    public function homepage_list_products_when_they_exists()
+    public function homepage_list_products()
     {
         $products = Product::factory()->count(5)->create();
 
@@ -33,5 +24,4 @@ class ProductListingTest extends TestCase
         $response->assertSee($products[3]->name);
         $response->assertSee($products[4]->name);
     }
-
 }

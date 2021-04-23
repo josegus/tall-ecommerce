@@ -38,4 +38,19 @@ class ProductFactory extends Factory
             'category_id' => Category::factory(),
         ];
     }
+
+    /**
+     * Indicate that the model instance must be created without relationships.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public function withoutRelationships()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'brand_id' => null,
+                'category_id' => null,
+            ];
+        });
+    }
 }
